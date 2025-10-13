@@ -1,8 +1,8 @@
 package steps.get;
 
-import config.ConfigReader;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.And;
+import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.apache.logging.log4j.Logger;
 import steps.SharedContext;
@@ -11,23 +11,20 @@ import utils.LoggerHelper;
 import static io.restassured.RestAssured.given;
 import static org.junit.Assert.assertNotNull;
 
-public class UserSteps {
-    private static final Logger logger = LoggerHelper.getLogger(ConfigReader.class);
+public class GetUserSteps {
+    private static final Logger logger = LoggerHelper.getLogger(GetUserSteps.class);
     private final SharedContext context;
-    private final String baseUrl = ConfigReader.get("BASE_URL");
 
-    public UserSteps(SharedContext context) {
+    public GetUserSteps(SharedContext context) {
         this.context = context;
     }
 
     @When("I send a GET request to {string}")
     public void iSendAGetRequestTo(String endpoint) {
-        String fullUrl = baseUrl + endpoint;
-        logger.info("Sending GET to: {}", fullUrl);
-
         Response response = given()
+                .spec(RestAssured.requestSpecification)
                 .when()
-                .get(baseUrl + endpoint)
+                .get(endpoint)
                 .then()
                 .extract()
                 .response();

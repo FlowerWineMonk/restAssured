@@ -3,6 +3,7 @@ package steps.get;
 import config.ConfigReader;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
+import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import steps.SharedContext;
 
@@ -24,6 +25,7 @@ public class BaseUrlSteps {
     @When("I send a GET request to the base URL")
     public void iSendAGetRequestToTheBaseUrl() {
         Response response = given()
+                .spec(RestAssured.requestSpecification)
                 .when()
                 .get(baseUrl)
                 .then()

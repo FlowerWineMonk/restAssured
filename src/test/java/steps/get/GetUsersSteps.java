@@ -9,10 +9,10 @@ import java.util.Map;
 
 import static org.junit.Assert.*;
 
-public class UsersSteps {
+public class GetUsersSteps {
     private final SharedContext context;
 
-    public UsersSteps(SharedContext context) {
+    public GetUsersSteps(SharedContext context) {
         this.context = context;
     }
 
